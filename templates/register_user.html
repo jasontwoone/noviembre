@@ -1,0 +1,57 @@
+{% extends "layout.html" %}
+
+{% block content %}
+
+
+
+<form method="POST"  action="{{ url_for('registro') }}" style="border:1px solid #ccc">
+    <div class="container">
+      <h1>Registro</h1>
+      <p>Por favor llena los campos para crear una cuenta</p>
+      <hr>
+      {% if error %}
+      <h2>Las Contraseñas no coinciden intentalo nuevamente</h2>
+      {% endif %}
+      <label for="username"><b>Nombre de usuario</b></label>
+      <input type="text" placeholder="Ingresar Nombre de Usuario" name="nombre_usuario" required>
+
+      <label for="name"><b>Nombre</b></label>
+      <input type="text" placeholder="Ingresa Nombre" name="Nombre" required>
+      
+      <label for="lastname"><b>Apellido</b></label>
+      <input type="text" placeholder="Ingresar Apellido" name="apellido" required>
+
+      <label for="email"><b>Email</b></label>
+      <input type="text" placeholder="Enter Email" name="email" required>
+  
+      <label for="psw"><b>Password</b></label>
+      <input type="password" placeholder="Enter Password" name="psw" required>
+  
+      <label for="psw-repeat"><b>Repeat Password</b></label>
+      <input type="password" placeholder="Repeat Password" name="psw-repeat" required>
+  
+      <label>
+        <input type="checkbox" checked="checked" name="remember" style="margin-bottom:15px"> Remember me
+      </label>
+  
+      <p>Al crear tu cuenta aceptas nuestros  <a href="#" style="color:dodgerblue">Terms & Privacy</a>.</p>
+  
+      <div class="clearfix">
+        <button type="button" class="cancelbtn">Cancel</button>
+        <button type="submit" class="signupbtn">Registrar</button>
+      </div>
+    </div>
+  </form>
+
+
+
+
+
+
+{% for item in recetas %}
+  <li>{{ item }}</li>
+{% endfor %}
+
+
+
+{% endblock%}

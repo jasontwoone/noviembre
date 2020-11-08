@@ -1,0 +1,18 @@
+{% extends "base_log.html" %}
+
+{% block content %}
+
+{% if ingreso_correcto %}
+<div class="alert alert-success" role="alert">
+    Iniciaste sesion correctamente
+  </div>
+
+      {% endif %}
+
+
+{% if art %}
+   {{ art }}
+{% endif %}
+
+
+{% endblock%}
