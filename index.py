@@ -207,5 +207,5 @@ def agregar_recetas():
 if __name__ == "__main__":  
     db.create_all()
 
-    app.run( threaded=True, port = 5000)  # esto se encarga de ejecutar en el servidors
+    app.run( threaded=False, port = 5000)  # esto se encarga de ejecutar en el servidors
 
