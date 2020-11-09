@@ -15,9 +15,12 @@ from requests import get
 from Datos.receta import Receta 
 import json
 from Datos.Usuario import Usuario 
-Usuario1 = Usuario("admin", "admin")
+Usuario1 = Usuario("admin", "admin", "admin", "s@gmail.com" , "admin")
+Usuario2 = Usuario("admin", "admin", "admin", "s@gmail.com" , "admin")
 
-Usuarios = [Usuario1]
+usuarios = [Usuario1, Usuario2]
+
+
 
 Recetas = [
     {
@@ -199,13 +202,45 @@ def agregar_recetas():
     db.session.commit()
 
     return ( "agregado bien")
-        
+#parte a prueba _________________________________________________________________________   
+# 
+def validar_login(user, contrasena):
+    for usuario in usuarios:
+        if usuario.nombre == user and usuario.contraseñaUsuario == contrasena:
+            return usuario
+    return None
+
+@app.route('/login2', methods=['POST', 'GET'])
+def login2():
+    error = None
+    if request.method == 'POST':
+        usuario = validar_login(request.form['uname'], request.form['psw'])
+        if usuario != None:
+            session['usuario_logeado'] = usuario.nombre
+            return render_template('login_status.html')
+        else:
+            error = 'Contrasena invalida'
+            return "contraseña incorrecta"
+    if 'usuario_logeado' in session:
+        return "corecto"
+    return render_template('home_log.html')
     
 
-
+@app.route('/registroUsuario', methods=['GET', 'POST'])  #wrap o un decorador
+def registroUsuario():
+    error = 'Contraseña invalida'
+    if request.method == "POST":
+        if (request.form['psw']) == (request.form['psw-repeat']):
+            
+            new_usuario = Users(username = request.form['nombre_usuario'], nombre = request.form['Nombre'] ,
+            Apellido = request.form['apellido'], email = request.form['email'], Password=request.form['psw'])
+            
+            return "Registrado correctamente"
+        return render_template('register_user.html', error=error) 
+    return  render_template('register_user.html')
 
 if __name__ == "__main__":  
     db.create_all()
 
-    app.run( debug=False, port = 5000)  # esto se encarga de ejecutar en el servidors
+    app.run( debug=True, port = 5000)  # esto se encarga de ejecutar en el servidors
 
