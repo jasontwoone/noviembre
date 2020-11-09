@@ -18,8 +18,8 @@
         <div class="collapse navbar-collapse" id="navbarNav">
           <ul class="navbar-nav ml-auto">
             <li class="nav-item active">
-              <a class="nav-link" href="/"> Usuario: {% if art %}
-                {{ art }}
+              <a class="nav-link" href="/"> Usuario: {% if Usuariodentro %}
+                {{ Usuariodentro }}
              {% endif %} </a>
             </li>
         
@@ -34,7 +34,7 @@
               </li>
 
             <li class="nav-item">
-                <a class="btn btn-outline-dark" href="{{ url_for('logout') }} ">Cerrar Sesion</a>
+                <a class="btn btn-outline-dark" href="{{ url_for('logout2') }} ">Cerrar Sesion</a>
             </li>
             <li class="nav-item">
                 <a class="btn btn-outline-dark" href="{{ url_for('registro') }} ">Perfil</a>

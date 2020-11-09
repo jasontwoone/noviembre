@@ -15,10 +15,12 @@ from requests import get
 from Datos.receta import Receta 
 import json
 from Datos.Usuario import Usuario 
-Usuario1 = Usuario("admin", "admin", "admin", "s@gmail.com" , "admin")
-Usuario2 = Usuario("admin", "admin", "admin", "s@gmail.com" , "admin")
 
-usuarios = [Usuario1, Usuario2]
+Usuario1 = Usuario("admin", "admin", "admin", "s@gmail.com" , "admin")
+
+
+
+usuarios = [Usuario1]
 
 
 
@@ -72,10 +74,7 @@ class Users(db.Model):
     Password = db.Column(db.String(80), nullable=False)
 
 
-class ListaRecetas(db.Model):
-    id = db.Column(db.Integer, primary_key=True)
-    autor = db.Column(db.String(80), nullable=False)
-    Titulo = db.Column(db.String(80), nullable=False)
+
 
 
 
@@ -204,38 +203,53 @@ def agregar_recetas():
     return ( "agregado bien")
 #parte a prueba _________________________________________________________________________   
 # 
+@app.route('/logout2', methods=['GET'])
+def logout2():
+    session.pop('usuario_logeado', None)
+    return render_template('login-form.html')
+
+
 def validar_login(user, contrasena):
     for usuario in usuarios:
         if usuario.nombre == user and usuario.contraseñaUsuario == contrasena:
             return usuario
+            
     return None
 
 @app.route('/login2', methods=['POST', 'GET'])
 def login2():
+    ingreso_correcto = 'ingreso correcto'
     error = None
     if request.method == 'POST':
         usuario = validar_login(request.form['uname'], request.form['psw'])
         if usuario != None:
             session['usuario_logeado'] = usuario.nombre
-            return render_template('login_status.html')
+            Usuariodentro = usuario.nombre
+            return render_template('login_status.html', ingreso_correcto=ingreso_correcto, Usuariodentro=Usuariodentro)
         else:
             error = 'Contrasena invalida'
             return "contraseña incorrecta"
     if 'usuario_logeado' in session:
-        return "corecto"
+        return render_template('home_log.html')
     return render_template('home_log.html')
     
-
+usuario4=("a","a","a","a","a")
 @app.route('/registroUsuario', methods=['GET', 'POST'])  #wrap o un decorador
 def registroUsuario():
     error = 'Contraseña invalida'
     if request.method == "POST":
         if (request.form['psw']) == (request.form['psw-repeat']):
-            
-            new_usuario = Users(username = request.form['nombre_usuario'], nombre = request.form['Nombre'] ,
-            Apellido = request.form['apellido'], email = request.form['email'], Password=request.form['psw'])
-            
+            for usuario in usuarios:
+                print(usuario.nombreUsuario, usuario.emailUsuario, usuario.contraseñaUsuario)
+            username = request.form['nombre_usuario']
+            nombre = request.form['Nombre']
+            Apellido = request.form['apellido']
+            email = request.form['email']
+            Password=request.form['psw']
+            usuarios.append(Usuario(username, Apellido, email, email , Password))
             return "Registrado correctamente"
+            
+            print (usuarios)
         return render_template('register_user.html', error=error) 
     return  render_template('register_user.html')
 
