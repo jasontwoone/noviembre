@@ -43,11 +43,11 @@ Recetas_recientes = [
     }
         ]        
 
-dbdir = os.environ.get("DATABASE_URL")
+dbdir = "sqlite:///" + os.path.abspath(os.getcwd()) + "/database.db"
 
 app = Flask(__name__) #app = Flask(__name__)
 
-app.config['SECRET_KEY']='secret'
+
 app.config["SQLALCHEMY_DATABASE_URI"] = dbdir
 
 
@@ -61,7 +61,6 @@ def get_all_recetas():
 
 
 class Users(db.Model):
-    __tablename__='users'
     id = db.Column(db.Integer, primary_key=True)
     username = db.Column(db.String(50), unique=True, nullable=False)
     nombre = db.Column(db.String(80), nullable=False)
@@ -69,7 +68,6 @@ class Users(db.Model):
     email = db.Column(db.String(50), unique=True, nullable=False)
     Password = db.Column(db.String(80), nullable=False)
 
-db.init_app()
 
 class ListaRecetas(db.Model):
     id = db.Column(db.Integer, primary_key=True)
