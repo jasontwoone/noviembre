@@ -43,11 +43,11 @@ Recetas_recientes = [
     }
         ]        
 
-dbdir = "sqlite:///" + os.path.abspath(os.getcwd()) + "/database.db"
+dbdir = os.environ.get("DATABASE_URL")
 
 app = Flask(__name__) #app = Flask(__name__)
 
-
+app.config['SECRET_KEY']='secret'
 app.config["SQLALCHEMY_DATABASE_URI"] = dbdir
 
 
