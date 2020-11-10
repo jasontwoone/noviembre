@@ -1,5 +1,10 @@
 class Receta:
-    def __init__(self, titulo, contenido, imagen):
+    def __init__(self, autor, titulo, resumen, procedimiento, tiempo, rutaImagen):
+        self.autor =autor
         self.titulo = titulo
-        self.contenido = contenido
-        self.imagen = imagen
+        self.resumen = resumen
+        self.procedimiento = procedimiento
+        self.tiempo = tiempo
+        self.rutaImagen = rutaImagen
+        
+        

@@ -3,10 +3,10 @@
 {% block content %}
 
 
-<form method="POST"  action="{{ url_for('agregar_recetas') }}">
+<form method="POST"  action="{{ url_for('agregar_receta2') }}">
     <div class="form-group">
       <label for="formGroupExampleInput">Autor</label>
-      <input type="text"  class="form-control" id="formGroupExampleInput" name="Autor"placeholder="Autor">
+      <input type="text"  class="form-control" id="formGroupExampleInput" name="Autor"  placeholder="">
     </div>
     <div class="form-group">
         <label for="formGroupExampleInput">Titulo</label>
@@ -18,15 +18,15 @@
       </div>
     <div class="form-group">
         <label for="exampleFormControlTextarea1">Procedimiento</label>
-        <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+        <textarea class="form-control" id="exampleFormControlTextarea1" name="Procedimiento" rows="3"></textarea>
       </div>
       <div class="form-group">
         <label for="formGroupExampleInput">Tiempo</label>
-        <input type="text"  class="form-control" id="formGroupExampleInput" placeholder="tiempo">
+        <input type="text"  class="form-control" id="formGroupExampleInput" name="Tiempo" placeholder="tiempo">
       </div>
     <div class="form-group">
-      <label for="formGroupExampleInput2">Ruta Imagen</label>
-      <input type="text" class="form-control" id="formGroupExampleInput2" placeholder="Ruta imagen">
+      <label for="formGroupExampleInput2">Ruta_Imagen</label>
+      <input type="text" class="form-control" id="formGroupExampleInput2" name="Ruta_Imagen" placeholder="Ruta imagen">
     </div>
     
     <div class="clearfix">

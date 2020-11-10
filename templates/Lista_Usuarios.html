@@ -1,0 +1,39 @@
+{% extends "base_log.html" %}
+
+{% block content %}
+
+<h1>Lista Usuarios</h1>
+
+
+
+<table class="table">
+    <thead>
+    <tr>
+        <th scope="col">#</th>
+        <th scope="col">Nombre Usuario</th>
+        <th scope="col">Nombre</th>
+        <th scope="col">Apellido</th>
+        <th scope="col">email</th>
+    </tr>
+    </thead>
+
+    {% if valore %}
+    {% for usuario in usuarios: %}
+
+    <tbody>
+    <tr>
+        <th scope="row">1</th>
+        <td>{{ usuario.nombreUsuario  }}</td>
+        <td>{{ usuario.nombre  }}</td>
+        <td>{{ usuario.apellidoUsuario  }}</td>
+        <td>{{ usuario.emailUsuario  }}</td>
+    </tr>
+    
+    
+
+{% endfor %}
+{% endif %}
+
+</tbody>
+</table>
+{% endblock%}

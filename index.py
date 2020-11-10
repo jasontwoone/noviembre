@@ -12,41 +12,20 @@ from flask import jsonify
 from flask import g
 import sqlite3
 from requests import get
-from Datos.receta import Receta 
+from Datos.Receta import Receta 
 import json
 from Datos.Usuario import Usuario 
 
 Usuario1 = Usuario("admin", "admin", "admin", "s@gmail.com" , "admin")
-
-
-
 usuarios = [Usuario1]
 
 
+Receta1 = Receta("autor", "titulo", "Resumen", "Procedimiento", "Tiempo", "Ruta imagen")
+Receta2 = Receta("autor", "titulo", "Resumen", "Procedimiento", "Tiempo", "Ruta imagen")
+recetas = [Receta1, Receta2]
 
-Recetas = [
-    {
-        "id": 1,
-        "title": "1. - preparacion de alimentos"
-    },
-    {
-        "id": 2,
-        "title": "1. - preparacion de alimentos"
-       
-    }
-        ]
 
-Recetas_recientes = [
-    {
-        "id": 1,
-        "title": "1. - preparacion de alimentos"
-    },
-    {
-        "id": 2,
-        "title": "1. - preparacion de alimentos"
-      
-    }
-        ]        
+
 
 dbdir = "sqlite:///" + os.path.abspath(os.getcwd()) + "/database.db"
 
@@ -59,10 +38,7 @@ app.config["SQLALCHEMY_DATABASE_URI"] = dbdir
 db = SQLAlchemy(app)
 
 
-@app.route("/recetario")
-def get_all_recetas():
-    
-    return jsonify({"tiprecetas": {"tipoRece": Recetas, "TipoRece2": Recetas_recientes}})
+
 
 
 class Users(db.Model):
@@ -142,12 +118,12 @@ def registro():
         return render_template('register_user.html', error=error) 
     return  render_template('register_user.html') 
 
-recetas=['pizza','pastel','pollo']
+
 
 @app.route("/home_log")
 def home_log():
-    asl= url_for("home")
-    return url_for("home", next="login")
+
+    return render_template('home_log.html')
 
 @app.route("/google")
 def ir_a_google():
@@ -163,8 +139,10 @@ def today():
 
 @app.route("/receta_form")
 def receta_form():
-    
-    return render_template('receta_form.html') 
+    valore= "valores"
+
+
+    return render_template('receta_form.html',valore =valore, recetas=recetas  ) 
 
 @app.route("/acerca_de")
 def acerca_de():
@@ -174,6 +152,15 @@ def acerca_de():
 def contactenos():
     return render_template('contactenos.html')
 
+@app.route("/Perfil/Lista_Usuarios")
+def Lista_Usuarios():
+    valore= "valores"
+    return render_template('Lista_Usuarios.html', valore =valore, usuarios = usuarios)    
+
+@app.route("/perfil")
+def perfil():
+
+    return render_template('perfil.html')
 
 
 @app.route('/recuperar_contraseña',methods=['POST'])
@@ -193,14 +180,41 @@ def forget_password():
         print(r.username)
     return render_template('forget_password.html',resultado = resultado, nombreus = nombreus)
 
-@app.route('/agregar_receta', methods=['GET', 'POST'])
-def agregar_recetas():
-    
-    new_Receta = ListaRecetas(autor = "jjjj" , Titulo = "receta")
-    db.session.add(new_Receta)
-    db.session.commit()
 
-    return ( "agregado bien")
+def mostrar_recetas():
+    for receta in recetas:
+        a= receta.titulo, receta.resumen
+        print(a)
+    return a
+
+@app.route('/agregar_receta', methods=['GET', 'POST'])
+def agregar_receta2():
+    if request.method == "POST":
+        for receta in recetas:
+
+            print (receta.titulo)
+            valore = receta.titulo
+        registrocorrecto="bien registro"
+        autor = request.form['Autor']
+        titulo = request.form['Titulo']
+        Resumen = request.form['Resumen']
+        Procedimiento = request.form['Procedimiento']
+        tiempo = request.form['Tiempo']
+        urlimagen = request.form['Ruta_Imagen']
+        
+        recetas.append(Receta(autor, titulo, Resumen, Procedimiento, tiempo, urlimagen))
+            
+            
+        return render_template("receta_form.html", registrocorrecto=registrocorrecto, valore=valore, recetas=recetas)
+           
+        return  render_template('agregar_receta.html')
+
+
+    return render_template('agregar_receta.html')
+
+
+
+
 #parte a prueba _________________________________________________________________________   
 # 
 @app.route('/logout2', methods=['GET'])
@@ -247,7 +261,7 @@ def registroUsuario():
             email = request.form['email']
             Password=request.form['psw']
             usuarios.append(Usuario(username, Apellido, email, email , Password))
-            return "Registrado correctamente"
+            return render_template('login-form.html')
             
             print (usuarios)
         return render_template('register_user.html', error=error) 

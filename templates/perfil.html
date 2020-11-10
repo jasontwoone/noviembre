@@ -1,0 +1,108 @@
+
+{% extends "base_log.html" %}
+
+{% block content %}
+
+
+<link href="//netdna.bootstrapcdn.com/bootstrap/3.1.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<script src="//netdna.bootstrapcdn.com/bootstrap/3.1.0/js/bootstrap.min.js"></script>
+<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+<!------ Include the above in your HEAD tag ---------->
+
+
+<div class="container">
+    <div class="span3 well">
+        <center>
+        <a href="{{ url_for('Lista_Usuarios') }}" data-toggle="modal" data-target="#myModal">  <img src="data:image/png;base64,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"></a>
+        <h3>Perfil</h3>
+        <em>Clic en la imagen </em>
+		</center>
+    </div>
+    <!-- Modal -->
+    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+                    <h4 class="modal-title" id="myModalLabel">More About Joe</h4>
+                    </div>
+                <div class="modal-body">
+                    <center>
+                    <img src="https://encrypted-tbn2.gstatic.com/images?q=tbn:ANd9GcRbezqZpEuwGSvitKy3wrwnth5kysKdRqBW54cAszm_wiutku3R" name="aboutme" width="140" height="140" border="0" class="img-circle">  </a>
+                    <h3 class="media-heading">Joe Sixpack <small>USA</small></h3>
+                    <span><strong>Skills: </strong></span>
+                        <span class="label label-warning">HTML5/CSS</span>
+                        <span class="label label-info">Adobe CS 5.5</span>
+                        <span class="label label-info">Microsoft Office</span>
+                        <span class="label label-success">Windows XP, Vista, 7</span>
+                    </center>
+                    <hr>
+                    <center>
+                    <p class="text-left"><strong>Bio: </strong><br>
+                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut sem dui, tempor sit amet commodo a, vulputate vel tellus.</p>
+                    <br>
+                    </center>
+                </div>
+                <div class="modal-footer">
+                    <center>
+                    <button type="button" class="btn btn-default" data-dismiss="modal">I've heard enough about Joe</button>
+                    </center>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+
+
+
+<div class="container">
+    <div class="span3 well">
+        <center>
+        <a href="{{ url_for('Lista_Usuarios') }}" data-toggle="modal" data-target="#myModal"><img src="data:image/png;base64,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"></a>
+        <h3>Listado usuarios</h3>
+        <em>Clic en la imagen </em>
+		</center>
+    </div>
+    <!-- Modal -->
+    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+                    <h4 class="modal-title" id="myModalLabel">More About Joe</h4>
+                    </div>
+                <div class="modal-body">
+                    <center>
+                    <img src="https://encrypted-tbn2.gstatic.com/images?q=tbn:ANd9GcRbezqZpEuwGSvitKy3wrwnth5kysKdRqBW54cAszm_wiutku3R" name="aboutme" width="140" height="140" border="0" class="img-circle"></a>
+                    <h3 class="media-heading">Joe Sixpack <small>USA</small></h3>
+                    <span><strong>Skills: </strong></span>
+                        <span class="label label-warning">HTML5/CSS</span>
+                        <span class="label label-info">Adobe CS 5.5</span>
+                        <span class="label label-info">Microsoft Office</span>
+                        <span class="label label-success">Windows XP, Vista, 7</span>
+                    </center>
+                    <hr>
+                    <center>
+                    <p class="text-left"><strong>Bio: </strong><br>
+                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut sem dui, tempor sit amet commodo a, vulputate vel tellus.</p>
+                    <br>
+                    </center>
+                </div>
+                <div class="modal-footer">
+                    <center>
+                    <button type="button" class="btn btn-default" data-dismiss="modal">I've heard enough about Joe</button>
+                    </center>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+{% endblock%}
+
+
+
