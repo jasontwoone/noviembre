@@ -16,7 +16,7 @@ from Datos.Receta import Receta
 import json
 from Datos.Usuario import Usuario 
 
-Usuario1 = Usuario("admin", "admin", "admin", "s@gmail.com" , "admin")
+Usuario1 = Usuario("admin", "admin", "admin", "admin@gmail.com" , "admin")
 usuarios = [Usuario1]
 
 
@@ -270,5 +270,5 @@ def registroUsuario():
 if __name__ == "__main__":  
     db.create_all()
 
-    app.run( debug=True, port = 5000)  # esto se encarga de ejecutar en el servidors
+    app.run( debug=False, port = 5000)  # esto se encarga de ejecutar en el servidors
 
